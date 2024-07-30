@@ -3,23 +3,19 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "start": "npx tsc && node ./dist/index",
-    "dev": "node --watch --loader ts-node/esm ./src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx tsc"
+    "start": "export NODE_ENV=production && node ./src/index",
+    "dev": "export DEBUG=server NODE_ENV=development && node --env-file=.env --watch ./src/index",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "debug": "^4.3.6",
     "express": "^4.19.2"
   },
   "devDependencies": {
-    "@types/node": "^20.14.12",
-    "nodemon": "^3.1.4",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.4"
+    "morgan": "^1.10.0"
   }
 }
