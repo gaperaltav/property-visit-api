@@ -2,20 +2,26 @@
   "name": "property-visit-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index",
+  "type": "module",
   "scripts": {
-    "start": "export NODE_ENV=production && node ./src/index",
-    "dev": "export DEBUG=server NODE_ENV=development && node --env-file=.env --watch ./src/index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist/index",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "dev": "npx tsx watch src/index"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "debug": "^4.3.6",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "joi": "^17.13.3"
   },
   "devDependencies": {
-    "morgan": "^1.10.0"
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.1.0",
+    "morgan": "^1.10.0",
+    "tsx": "^4.16.5",
+    "typescript": "^5.5.4"
   }
 }
