@@ -5,7 +5,7 @@
   "main": "src/index",
   "type": "module",
   "scripts": {
-    "start": "node dist/index",
+    "start": "npx tsc && node dist/index",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "dev": "npx tsx watch src/index"
