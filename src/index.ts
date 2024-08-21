@@ -1,17 +1,18 @@
 import express, { Express } from "express";
 import morgan from "morgan";
-import dotenv from "dotenv";
+import config from "./config.js";
 
-dotenv.config();
+import propertyTypes from "./routes/property-types.js";
 
-const { NODE_ENV, PORT } = process.env;
+const { env, port } = config;
 
 const server: Express = express();
 
 server.use(express.json());
-console.log({ NODE_ENV })
 
-if (NODE_ENV === "development") {
+console.log({ config });
+
+if (env === "development") {
   server.use(morgan("dev"));
 }
 
@@ -19,6 +20,8 @@ server.get("/api", (req, res) => {
   res.send("Welcome to properties API.");
 });
 
-server.listen(PORT);
+// importing api routes
+server.use("/api/property-types", propertyTypes);
 
-console.log(`Running server on port ${PORT}`);
+server.listen(port);
+console.log(`Running server on port ${port}`);
