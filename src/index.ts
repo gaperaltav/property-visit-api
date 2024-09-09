@@ -1,4 +1,5 @@
 import express, { Express } from "express";
+import helmet from "helmet";
 import morgan from "morgan";
 import config from "./config.js";
 
@@ -9,8 +10,7 @@ const { env, port } = config;
 const server: Express = express();
 
 server.use(express.json());
-
-console.log({ config });
+server.use(helmet());
 
 if (env === "development") {
   server.use(morgan("dev"));
