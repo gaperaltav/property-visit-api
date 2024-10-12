@@ -2,12 +2,17 @@ import express, { Express } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import config from "./config.js";
+import debug from "debug";
 
-import propertyTypes from "./routes/property-types.js";
+import properties from "./routes/properties.js";
+
+import { connectToDatabase} from "./db"
 
 const { env, port } = config;
 
+const serverDebugger = debug("server:app");
 const server: Express = express();
+
 
 server.use(express.json());
 server.use(helmet());
@@ -16,12 +21,14 @@ if (env === "development") {
   server.use(morgan("dev"));
 }
 
+connectToDatabase();
+
 server.get("/api", (req, res) => {
   res.send("Welcome to properties API.");
 });
 
 // importing api routes
-server.use("/api/property-types", propertyTypes);
+server.use("/api/properties", properties);
 
 server.listen(port);
-console.log(`Running server on port ${port}`);
+serverDebugger(`Running server on port ${port}`);
