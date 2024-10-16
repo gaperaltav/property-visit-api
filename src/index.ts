@@ -6,7 +6,7 @@ import debug from "debug";
 
 import properties from "./routes/properties.js";
 
-import { connectToDatabase} from "./db"
+import { dbConnect} from "./db"
 
 const { env, port } = config;
 
@@ -21,7 +21,9 @@ if (env === "development") {
   server.use(morgan("dev"));
 }
 
-connectToDatabase();
+// TODO: Move this connection 
+// and called it only when is need it.
+dbConnect();
 
 server.get("/api", (req, res) => {
   res.send("Welcome to properties API.");

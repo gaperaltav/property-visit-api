@@ -1,10 +1,8 @@
-import mongoose from "mongoose";
+import mongoose, { Types } from "mongoose";
 
 interface Property {
-  id: String,
   name: String;
   tags?: [String];
   rooms?: Number;
   date: Date;
 }
- 

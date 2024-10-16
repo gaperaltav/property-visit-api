@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
 import debug from "debug";
 
-const debugDb = debug("server:db");
+const debugServer = debug("server:db");
 
-export const connectToDatabase = async () => {
+export const dbConnect = async () => {
   return mongoose
     .connect("mongodb://localhost/property-visit")
     .then(() => {
-      debugDb("Connected to database");
+      debugServer("Connected to database");
     })
     .catch(() => {
-      debugDb("Failed to connect to database!");
+      debugServer("Failed to connect to database!");
     });
 };

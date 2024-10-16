@@ -1,7 +1,7 @@
-import { Schema } from "mongoose";
+import { Schema, Types } from "mongoose";
+import { Property } from "./types";
 
 export const propertySchema = new Schema<Property>({
-  id: String,
   name: String,
   rooms: Number,
   tags: [String],
