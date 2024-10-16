@@ -28,7 +28,6 @@ router.post("/", async (req, res) => {
   // TODO: Add this with Endpoints body
   await PropertyModel.create({
     name: " Example property",
-    date: new Date(),
     tags: ["penthouse"],
     rooms: 2,
   });

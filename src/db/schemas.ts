@@ -5,5 +5,5 @@ export const propertySchema = new Schema<Property>({
   name: String,
   rooms: Number,
   tags: [String],
-  date: String,
+  date: { type: Date, default: Date.now() },
 });
