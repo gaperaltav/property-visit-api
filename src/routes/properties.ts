@@ -1,4 +1,4 @@
-import express, { response } from "express";
+import express from "express";
 import { PropertyModel } from "../db/models";
 import { getPropertyValidator } from "./validators";
 
