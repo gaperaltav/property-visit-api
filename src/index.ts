@@ -13,7 +13,6 @@ const { env, port } = config;
 const serverDebugger = debug("server:app");
 const server: Express = express();
 
-
 server.use(express.json());
 server.use(helmet());
 

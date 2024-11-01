@@ -26,11 +26,16 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   // TODO: Add this with Endpoints body
-  await PropertyModel.create({
-    name: " Example property",
-    tags: ["penthouse"],
-    rooms: 2,
-  });
+  try {
+    await PropertyModel.create({
+      name: " Example property",
+      tags: ["penthouse"],
+      rooms: 2,
+    });
+  } catch (error: any) {
+    res.status(500).json(error.message);
+  }
+
   res.json("object created");
 });
 
