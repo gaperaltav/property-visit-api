@@ -5,6 +5,7 @@ interface Property {
   tags?: [string];
   rooms?: number;
   parking_lots?: number;
+  description?: string;
   type: string;
   address: string;
   date: Date;

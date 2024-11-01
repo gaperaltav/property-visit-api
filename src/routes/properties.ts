@@ -31,6 +31,8 @@ router.post("/", async (req, res) => {
       name: " Example property",
       tags: ["penthouse"],
       rooms: 2,
+      description: 'tu amo',
+      type: 'land'
     });
   } catch (error: any) {
     res.status(500).json(error.message);
