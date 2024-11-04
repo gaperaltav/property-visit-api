@@ -5,6 +5,7 @@ import config from "./config.js";
 import debug from "debug";
 
 import properties from "./routes/properties.js";
+import agents from "./routes/agents.js"
 
 import { dbConnect} from "./db"
 
@@ -30,6 +31,7 @@ server.get("/api", (req, res) => {
 
 // importing api routes
 server.use("/api/properties", properties);
+server.use("/api/agents", agents);
 
 server.listen(port);
 serverDebugger(`Running server on port ${port}`);

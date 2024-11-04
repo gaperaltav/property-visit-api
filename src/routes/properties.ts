@@ -1,6 +1,7 @@
 import express from "express";
 import { PropertyModel } from "../db/models";
 import { getPropertyValidator } from "./validators";
+import mongoose from "mongoose";
 
 const router = express.Router();
 
@@ -32,13 +33,14 @@ router.post("/", async (req, res) => {
       tags: ["penthouse"],
       rooms: 2,
       description: 'tu amo',
-      type: 'land'
+      category: 'land',
+      agent: new mongoose.Types.ObjectId()
     });
   } catch (error: any) {
     res.status(500).json(error.message);
   }
 
-  res.json("object created");
+  res.json("New Property created");
 });
 
 export default router;
