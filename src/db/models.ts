@@ -1,7 +1,7 @@
 import { model } from "mongoose";
-import { AgentSchema, propertySchema } from "./schemas";
-import { Agent, Property } from "./types";
+import { userSchema, propertySchema } from "./schemas";
+import { User, Property } from "../types";
 
 export const PropertyModel = model<Property>("Property", propertySchema);
 
-export const AgentModel = model<Agent>("Agent", AgentSchema);
+export const UserModel = model<User>("User", userSchema);

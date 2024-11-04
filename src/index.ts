@@ -5,9 +5,10 @@ import config from "./config.js";
 import debug from "debug";
 
 import properties from "./routes/properties.js";
-import agents from "./routes/agents.js"
+import users from "./routes/users.js";
+import auth from "./routes/auth.js";
 
-import { dbConnect} from "./db"
+import { dbConnect } from "./db";
 
 const { env, port } = config;
 
@@ -21,7 +22,7 @@ if (env === "development") {
   server.use(morgan("dev"));
 }
 
-// TODO: Move this connection 
+// TODO: Move this connection
 // and called it only when is need it.
 dbConnect();
 
@@ -31,7 +32,8 @@ server.get("/api", (req, res) => {
 
 // importing api routes
 server.use("/api/properties", properties);
-server.use("/api/agents", agents);
+server.use("/api/users", users);
+server.use("/auth/login", auth);
 
 server.listen(port);
 serverDebugger(`Running server on port ${port}`);

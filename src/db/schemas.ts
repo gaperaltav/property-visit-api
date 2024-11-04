@@ -1,15 +1,23 @@
 import { Schema } from "mongoose";
-import { Property, Agent } from "./types";
+import { Property, PropertyCategories, Roles, User } from "../types";
 
-export const AgentSchema = new Schema<Agent>({
+export const userSchema = new Schema<User>({
   name: {
     type: String,
     minlength: 2,
+    maxlength: 50,
     required: true,
   },
   lastName: {
     type: String,
     minlength: 2,
+    maxlength: 50,
+    required: true,
+  },
+  password: {
+    type: String,
+    minlength: 7,
+    maxlength: 1024,
     required: true,
   },
   email: {
@@ -20,6 +28,16 @@ export const AgentSchema = new Schema<Agent>({
         return value.includes("@");
       },
       message: "this is not a valid email",
+    },
+    unique: true,
+  },
+  role: {
+    type: String,
+    validate: {
+      validator: function (value) {
+        return Object.values(Roles).includes(value);
+      },
+      message: "This is not a valid Role",
     },
   },
 });
@@ -42,11 +60,16 @@ export const propertySchema = new Schema<Property>({
   address: { type: String, default: null },
   category: {
     type: String,
-    enum: ["house", "apartment", "land", "commertial"],
     lowercase: true,
     required: true,
+    validate: {
+      validator: function (value) {
+        return Object.values(PropertyCategories).includes(value);
+      },
+      message: "This is not a valid Category",
+    },
   },
   tags: [String],
-  agent: { type: Schema.ObjectId, ref: 'agent' },
+  user: { type: Schema.ObjectId, ref: "user" },
   created_date: { type: Date, default: Date.now() },
 });
