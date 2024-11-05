@@ -1,20 +1,15 @@
 import mongoose from "mongoose";
 import debug from "debug";
-import dotenv from "dotenv";
-
-dotenv.config();
-
-const { DB_URI = "" } = process.env;
 
 const debugServer = debug("server:db");
 
-export const dbConnect = async () => {
+export const connectToDB = async (connectionString: string) => {
   return mongoose
-    .connect(DB_URI)
+    .connect(connectionString)
     .then(() => {
       debugServer("Connected to database");
     })
-    .catch(() => {
-      debugServer("Failed to connect to database!");
+    .catch((error) => {
+      debugServer("Failed to connect to database!", { message: error.message });
     });
 };

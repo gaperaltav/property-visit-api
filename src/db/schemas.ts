@@ -43,7 +43,7 @@ export const userSchema = new Schema<User>({
 });
 
 export const propertySchema = new Schema<Property>({
-  name: {
+  title: {
     type: String,
     minlength: 2,
     maxlength: 255,
@@ -55,7 +55,7 @@ export const propertySchema = new Schema<Property>({
     maxlength: 255,
     required: false,
   },
-  rooms: { type: Number, default: null },
+  rooms: { type: Number, default: null, required: false },
   parking_lots: { type: Number, default: null },
   address: { type: String, default: null },
   category: {

@@ -14,7 +14,7 @@ export enum PropertyCategories {
 }
 
 export interface Property {
-  name: string;
+  title: string;
   tags?: [string];
   rooms?: number;
   parking_lots?: number;

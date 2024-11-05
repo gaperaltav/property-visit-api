@@ -8,9 +8,9 @@ import properties from "./routes/properties.js";
 import users from "./routes/users.js";
 import auth from "./routes/auth.js";
 
-import { dbConnect } from "./db";
+import { connectToDB } from "./db";
 
-const { env, port } = config;
+const { env, port, connectionString } = config;
 
 const serverDebugger = debug("server:app");
 const server: Express = express();
@@ -22,9 +22,8 @@ if (env === "development") {
   server.use(morgan("dev"));
 }
 
-// TODO: Move this connection
-// and called it only when is need it.
-dbConnect();
+// Connecting to MongoDB
+connectToDB(connectionString);
 
 server.get("/api", (req, res) => {
   res.send("Welcome to properties API.");
