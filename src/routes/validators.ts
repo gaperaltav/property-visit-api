@@ -1,6 +1,5 @@
 import baseJoi from "joi";
 import joiObjectId from "@marsup/joi-objectid";
-import { Roles } from "../types";
 
 const Joi = baseJoi.extend(joiObjectId);
 
@@ -32,3 +31,8 @@ export const postUserValidator = userValidator.schema({
 export const ObjectIdValidator = Joi.object({
   id: Joi.objectId().required(),
 });
+
+export const authValidator = {
+  email: Joi.string().email().required(),
+  password: Joi.string(),
+};

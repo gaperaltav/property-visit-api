@@ -1,6 +1,7 @@
 import express from "express";
 import { UserModel } from "../db/models";
 import { userValidator } from "./validators";
+import bcrypt from "bcrypt";
 
 const router = express.Router();
 
@@ -16,18 +17,22 @@ router.post("/", async (req, res) => {
     return res.status(500).json(error.message);
   }
 
-  const existUser = await UserModel.findOne({ email: value.email})
+  const existUser = await UserModel.findOne({ email: value.email });
   if (existUser) {
     return res.status(400).json("User already exist");
   }
 
   try {
     const { name, lastName, email, password, role } = value;
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
     const user = new UserModel({
       name,
       lastName,
       email,
-      password,
+      password: hashedPassword,
       role,
     });
 
@@ -38,8 +43,9 @@ router.post("/", async (req, res) => {
       _id: userSaved.id,
       name: userSaved.name,
       lastName: userSaved.lastName,
-      email:  userSaved.email,
+      email: userSaved.email,
     });
+    
   } catch (error: any) {
     res.status(500).json(error.message);
   }
