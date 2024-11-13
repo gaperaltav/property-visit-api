@@ -32,7 +32,7 @@ server.get("/api", (req, res) => {
 // importing api routes
 server.use("/api/properties", properties);
 server.use("/api/users", users);
-server.use("/auth/login", auth);
+server.use("/auth", auth);
 
 server.listen(port);
 serverDebugger(`Running server on port ${port}`);

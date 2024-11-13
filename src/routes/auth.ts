@@ -1,9 +1,29 @@
 import express from "express";
+import bcrypt from "bcrypt";
+import { authValidator } from "./validators";
+import { UserModel } from "../db/models";
 
 const router = express.Router();
 
-router.post("/", (req, res) => {
-  res.send("you logged in");
+router.post("/login", async (req, res) => {
+  const { error } = authValidator.validate(req.body);
+
+  if (error) return res.status(400).json(error.message);
+
+  const user = await UserModel.findOne({ email: req.body.email });
+
+  if (!user)
+    return res.status(400).json("This is not a valid email or password");
+
+  const isValidPassword = await bcrypt.compare(
+    req.body.password,
+    user.password
+  );
+
+  if (!isValidPassword)
+    return res.status(400).json("This is not a valid email or password");
+
+  res.status(200).json({ message: "user is logged in!" });
 });
 
 export default router;

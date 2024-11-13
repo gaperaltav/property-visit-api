@@ -32,7 +32,7 @@ export const ObjectIdValidator = Joi.object({
   id: Joi.objectId().required(),
 });
 
-export const authValidator = {
+export const authValidator = Joi.object({
   email: Joi.string().email().required(),
   password: Joi.string(),
-};
+});
