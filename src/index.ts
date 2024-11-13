@@ -10,7 +10,12 @@ import auth from "./routes/auth.js";
 
 import { connectToDB } from "./db";
 
-const { env, port, connectionString } = config;
+const { env, port, host, jwtSecret } = config;
+
+if (!jwtSecret) {
+  console.error("FATAL ERROR: JWT_SECRET_KEY is not defined.");
+  process.exit(1);
+}
 
 const serverDebugger = debug("server:app");
 const server: Express = express();
@@ -23,7 +28,7 @@ if (env === "development") {
 }
 
 // Connecting to MongoDB
-connectToDB(connectionString);
+connectToDB(host);
 
 server.get("/api", (req, res) => {
   res.send("Welcome to properties API.");

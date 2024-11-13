@@ -6,6 +6,5 @@ The main objective of the app is to learn how to create and deploy a robust web 
 ### TODO:
 - [x] Add a object validation for validate entities (business Obects).
 - [x] Create a user's table.
-- [ ] Add configurations for the different deployments.
 - [ ] Generate JWT and authenticate users. 
-- [ ] Create a data acess layer.
+- [ ] Create a service layer (for abstract endpoints from DB and Business Logic).

@@ -1,7 +1,9 @@
 import express from "express";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import { authValidator } from "./validators";
 import { UserModel } from "../db/models";
+import config from "../config";
 
 const router = express.Router();
 
@@ -23,7 +25,16 @@ router.post("/login", async (req, res) => {
   if (!isValidPassword)
     return res.status(400).json("This is not a valid email or password");
 
-  res.status(200).json({ message: "user is logged in!" });
+  const payload = {
+    _id: user.id,
+    name: user.name,
+    lastName: user.lastName,
+    role: user.role,
+  };
+
+  const token = jwt.sign(payload, config.jwtSecret);
+
+  res.status(200).json({ token });
 });
 
 export default router;
