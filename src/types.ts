@@ -1,4 +1,6 @@
-import mongoose, { Schema } from "mongoose";
+import { Request } from "express";
+import { Secret } from "jsonwebtoken";
+import { Schema } from "mongoose";
 
 export enum Roles {
   Admin = "admin",
@@ -36,3 +38,10 @@ export interface User {
   password: string;
   role: Roles;
 }
+
+export type EnvConfig = {
+  env: string;
+  port: string | number;
+  host: string;
+  jwtSecretKey: Secret;
+};

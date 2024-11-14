@@ -9,10 +9,11 @@ import users from "./routes/users.js";
 import auth from "./routes/auth.js";
 
 import { connectToDB } from "./db";
+import { allowedResource } from "./middleware/auth.js";
 
-const { env, port, host, jwtSecret } = config;
+const { env, port, host, jwtSecretKey } = config;
 
-if (!jwtSecret) {
+if (!jwtSecretKey) {
   console.error("FATAL ERROR: JWT_SECRET_KEY is not defined.");
   process.exit(1);
 }
@@ -22,6 +23,9 @@ const server: Express = express();
 
 server.use(express.json());
 server.use(helmet());
+
+// Custom middlewares
+server.use(allowedResource);
 
 if (env === "development") {
   server.use(morgan("dev"));
@@ -34,7 +38,7 @@ server.get("/api", (req, res) => {
   res.send("Welcome to properties API.");
 });
 
-// importing api routes
+// Importing api routes
 server.use("/api/properties", properties);
 server.use("/api/users", users);
 server.use("/auth", auth);

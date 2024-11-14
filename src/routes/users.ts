@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
   res.status(200).json(users);
 });
 
-router.post("/", async (req, res) => {
+router.post("/register", async (req, res) => {
   const { error, value } = userValidator.validate(req.body);
 
   if (error) {

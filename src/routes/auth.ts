@@ -32,7 +32,7 @@ router.post("/login", async (req, res) => {
     role: user.role,
   };
 
-  const token = jwt.sign(payload, config.jwtSecret);
+  const token = jwt.sign(payload, config.jwtSecretKey);
 
   res.status(200).json({ token });
 });
