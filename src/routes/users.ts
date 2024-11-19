@@ -2,10 +2,11 @@ import express from "express";
 import { UserModel } from "../db/models";
 import { userValidator } from "./validators";
 import bcrypt from "bcrypt";
+import { authMiddleware } from "../middleware/auth-middleware";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", authMiddleware, async (req, res) => {
   const users = await UserModel.find();
   res.status(200).json(users);
 });
@@ -45,7 +46,6 @@ router.post("/register", async (req, res) => {
       lastName: userSaved.lastName,
       email: userSaved.email,
     });
-    
   } catch (error: any) {
     res.status(500).json(error.message);
   }

@@ -1,15 +1,16 @@
 import express from "express";
 import { PropertyModel } from "../db/models";
 import { ObjectIdValidator, propertyValidator } from "./validators";
+import { authMiddleware as authorized } from "../middleware/auth-middleware";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", authorized, async (req, res) => {
   const properties = await PropertyModel.find();
   res.status(200).json(properties);
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", authorized, async (req, res) => {
   const { error, value } = ObjectIdValidator.validate(req.params);
 
   if (error) {
@@ -24,7 +25,7 @@ router.get("/:id", async (req, res) => {
   res.status(200).json(property);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", authorized, async (req, res) => {
   const { error, value } = propertyValidator.validate(req.body);
   if (error) {
     return res.status(500).json(error.message);

@@ -9,7 +9,6 @@ import users from "./routes/users.js";
 import auth from "./routes/auth.js";
 
 import { connectToDB } from "./db";
-import { allowedResource } from "./middleware/auth.js";
 
 const { env, port, host, jwtSecretKey } = config;
 
@@ -24,8 +23,6 @@ const server: Express = express();
 server.use(express.json());
 server.use(helmet());
 
-// Custom middlewares
-server.use(allowedResource);
 
 if (env === "development") {
   server.use(morgan("dev"));
