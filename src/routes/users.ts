@@ -11,6 +11,15 @@ router.get("/", authMiddleware, async (req, res) => {
   res.status(200).json(users);
 });
 
+router.get("/current", authMiddleware, async (req, res) => {
+  const user = await UserModel.findById(req.user._id);
+  if (user?._id) {
+    const { password, ...currentUser } = user;
+    return res.status(200).json({ user: currentUser });
+  }
+  return res.status(401).json("Access denied. Invalid token provided.");
+});
+
 router.post("/register", async (req, res) => {
   const { error, value } = userValidator.validate(req.body);
 
