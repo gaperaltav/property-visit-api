@@ -12,10 +12,9 @@ router.get("/", authMiddleware, async (req, res) => {
 });
 
 router.get("/current", authMiddleware, async (req, res) => {
-  const user = await UserModel.findById(req.user._id);
+  const user = await UserModel.findById(req.user._id).select("-password");
   if (user?._id) {
-    const { password, ...currentUser } = user;
-    return res.status(200).json({ user: currentUser });
+    return res.status(200).json(user);
   }
   return res.status(401).json("Access denied. Invalid token provided.");
 });
