@@ -1,6 +1,7 @@
 import { NextFunction, Response, Request } from "express";
 import jwt from "jsonwebtoken";
 import config from "../config";
+import { Roles } from "../types";
 
 export const authMiddleware = (
   req: Request,
@@ -20,4 +21,15 @@ export const authMiddleware = (
   } catch (error) {
     return res.status(401).json("Invalid Token");
   }
+};
+
+export const adminMiddleware = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  if (req.user.role === Roles.Admin) {
+    return next();
+  }
+  return res.status(403).json("Access denied for this operation.");
 };

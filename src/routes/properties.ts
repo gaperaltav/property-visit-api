@@ -1,7 +1,7 @@
 import express from "express";
 import { PropertyModel } from "../db/models";
 import { ObjectIdValidator, propertyValidator } from "./validators";
-import { authMiddleware as authorized } from "../middleware/auth-middleware";
+import { authMiddleware as authorized } from "../middlewares/auth";
 
 const router = express.Router();
 
