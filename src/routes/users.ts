@@ -2,7 +2,7 @@ import express from "express";
 import { UserModel } from "../db/models";
 import { userValidator } from "./validators";
 import bcrypt from "bcrypt";
-import { authMiddleware } from "../middleware/auth-middleware";
+import { authMiddleware } from "../middlewares/auth";
 
 const router = express.Router();
 

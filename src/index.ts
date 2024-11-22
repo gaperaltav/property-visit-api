@@ -1,16 +1,12 @@
 import express, { Express } from "express";
-import helmet from "helmet";
 import morgan from "morgan";
-import config from "./config.js";
+import config from "./config";
 import debug from "debug";
 
-import properties from "./routes/properties.js";
-import users from "./routes/users.js";
-import auth from "./routes/auth.js";
+import { connectToDb } from "./db";
+import { loadApiRoutes } from "./routes/index.js";
 
-import { connectToDB } from "./db";
-
-const { env, port, host, jwtSecretKey } = config;
+const { env, port, jwtSecretKey } = config;
 
 if (!jwtSecretKey) {
   console.error("FATAL ERROR: JWT_SECRET_KEY is not defined.");
@@ -18,27 +14,20 @@ if (!jwtSecretKey) {
 }
 
 const serverDebugger = debug("server:app");
-const server: Express = express();
-
-server.use(express.json());
-server.use(helmet());
-
+const app: Express = express();
 
 if (env === "development") {
-  server.use(morgan("dev"));
+  app.use(morgan("dev"));
 }
 
 // Connecting to MongoDB
-connectToDB(host);
+connectToDb();
+// Loading api routes
+loadApiRoutes(app);
 
-server.get("/api", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("Welcome to properties API.");
 });
 
-// Importing api routes
-server.use("/api/properties", properties);
-server.use("/api/users", users);
-server.use("/auth", auth);
-
-server.listen(port);
+app.listen(port);
 serverDebugger(`Running server on port ${port}`);

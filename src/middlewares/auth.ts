@@ -8,7 +8,7 @@ export const authMiddleware = (
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.header("x-auth-token");
+  const token = req.header("Authorization");
 
   if (!token) {
     return res.status(401).json("Access denied . No token provided.");
