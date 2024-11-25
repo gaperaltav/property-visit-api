@@ -1,5 +1,5 @@
 import express from "express";
-import { UserModel } from "../db/models";
+import { UserModel } from "../models";
 import { userValidator } from "./validators";
 import bcrypt from "bcrypt";
 import { authMiddleware } from "../middlewares/auth";

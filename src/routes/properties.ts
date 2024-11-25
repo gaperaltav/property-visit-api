@@ -1,5 +1,5 @@
 import express from "express";
-import { PropertyModel } from "../db/models";
+import { PropertyModel } from "../models";
 import { ObjectIdValidator, propertyValidator } from "./validators";
 import { authMiddleware as authorized } from "../middlewares/auth";
 
