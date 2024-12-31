@@ -5,7 +5,7 @@ import properties from "./properties.js";
 import users from "./users.js";
 import auth from "./auth.js";
 
-export function loadApiRoutes(app: Express) {
+export function loadingApiRoutes(app: Express) {
   app.use(express.json());
   app.use(helmet());
   app.use("/api/properties", properties);

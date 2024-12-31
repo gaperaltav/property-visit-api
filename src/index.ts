@@ -2,9 +2,8 @@ import express, { Express } from "express";
 import morgan from "morgan";
 import config from "./config";
 import debug from "debug";
-
 import { connectToDb } from "./db";
-import { loadApiRoutes } from "./routes/index.js";
+import { loadingApiRoutes } from "./routes/index.js";
 
 const { env, port, jwtSecretKey } = config;
 
@@ -22,8 +21,9 @@ if (env === "development") {
 
 // Connecting to MongoDB
 connectToDb();
+
 // Loading api routes
-loadApiRoutes(app);
+loadingApiRoutes(app);
 
 app.get("/api", (req, res) => {
   res.send("Welcome to properties API.");
