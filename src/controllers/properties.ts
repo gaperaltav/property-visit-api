@@ -3,8 +3,12 @@ import { PropertyModel } from "../models";
 import { ObjectIdValidator, propertyValidator } from "./validators";
 
 export const getAllProperties = async (req: Request, res: Response) => {
-  const properties = await PropertyModel.find();
-  res.status(200).json(properties);
+  try {
+    const properties = await PropertyModel.find();
+    res.status(200).json(properties);
+  } catch (error) {
+    res.status(200).json("there is an error gettign properties");
+  }
 };
 
 export const getPropertyById = async (req: Request, res: Response) => {
@@ -14,11 +18,17 @@ export const getPropertyById = async (req: Request, res: Response) => {
     return res.status(500).json(error.message);
   }
 
-  const property = await PropertyModel.findById(value.id);
-  if (!property) {
-    return res.status(404).json(`Property with id "${value.id}" is not found.`);
+  try {
+    const property = await PropertyModel.findById(value.id);
+    if (!property) {
+      return res
+        .status(404)
+        .json(`Property with id "${value.id}" is not found.`);
+    }
+    res.status(200).json(property);
+  } catch (error: any) {
+    return res.status(500).json(error.message);
   }
-  res.status(200).json(property);
 };
 
 export const createProperty = async (req: Request, res: Response) => {
