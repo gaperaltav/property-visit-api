@@ -1,4 +1,3 @@
-import { Request } from "express";
 import { Secret } from "jsonwebtoken";
 import { Schema } from "mongoose";
 
@@ -14,7 +13,6 @@ export enum PropertyCategories {
   Commertial = "commertial",
   Industrial = "industrial",
 }
-
 export interface Property {
   title: string;
   tags?: [string];
@@ -25,12 +23,12 @@ export interface Property {
   address: string;
   created_date: Date;
   user: Schema.Types.ObjectId;
+  visits?: Visit[];
 }
-
 export interface Visit {
   date: Date;
+  userId?: Schema.Types.ObjectId;
 }
-
 export interface User {
   name: string;
   lastName: string;

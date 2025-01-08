@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "npx tsc && node dist/index",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx jest",
     "build": "tsc",
     "dev": "DEBUG='server:*' npx tsx watch src/index"
   },
@@ -30,8 +30,11 @@
     "@types/bcrypt": "^5.0.2",
     "@types/debug": "^4.1.12",
     "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.14",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.1.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
     "tsx": "^4.16.5",
     "typescript": "^5.5.4"
   }
