@@ -14,7 +14,7 @@ const testProperties = [
   },
 ];
 
-describe("properties controller", () => {
+describe("Property controller", () => {
   beforeEach(() => {
     PropertyModel.find = jest.fn().mockResolvedValue(testProperties);
   });
@@ -23,7 +23,7 @@ describe("properties controller", () => {
     jest.clearAllMocks();
   });
 
-  test("should return all properties", async () => {
+  test("it should return all properties", async () => {
     const req = {
       user: {
         _id: "12345",
@@ -40,8 +40,11 @@ describe("properties controller", () => {
     } as Response;
 
     await controller.getAllProperties(req, res);
-    
+
     expect(PropertyModel.find).toHaveBeenCalled();
     expect(res.status(200).json(testProperties)).toBe(testProperties);
+  });
+  test("it should return a property by id", async () => {
+    
   });
 });
