@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "npx tsc && node dist/index",
-    "test": "npx jest",
+    "test": "npx jest --watch",
     "build": "tsc",
     "dev": "DEBUG='server:*' npx tsx watch src/index"
   },

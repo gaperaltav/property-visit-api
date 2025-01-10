@@ -1,9 +1,10 @@
 import { describe, it } from "node:test";
 import controller from "../../controllers/properties";
+import { ObjectIdValidator } from "../../controllers/validators";
 import { PropertyModel } from "../../models";
 import { Request, Response } from "express";
 
-const testProperties = [
+let testProperties = [
   {
     _id: "1",
     title: "Test Property",
@@ -14,37 +15,54 @@ const testProperties = [
   },
 ];
 
+let request = {} as Request;
+let response = {} as Response;
+
 describe("Property controller", () => {
   beforeEach(() => {
-    PropertyModel.find = jest.fn().mockResolvedValue(testProperties);
-  });
-
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  test("it should return all properties", async () => {
-    const req = {
+    request = {
       user: {
         _id: "12345",
         role: "admin",
       },
     } as Request;
 
-    const res = {
-      status: (statusCode: number) => ({
-        json: (data: any) => {
-          return data;
-        },
-      }),
-    } as Response;
+    response = {
+      status: jest.fn(() => response),
+      json: jest.fn((res) => res),
+    } as unknown as Response;
 
-    await controller.getAllProperties(req, res);
+    //Models
+    // mocking Model.find
+    PropertyModel.find = jest.fn().mockResolvedValue(testProperties);
+    // mocking function findById
+    PropertyModel.findById = jest.fn().mockResolvedValue(testProperties[0]);
+
+    //Validators
+    ObjectIdValidator.validate = jest
+      .fn()
+      .mockReturnValue({ value: { id: "1" } });
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test("should return all properties", async () => {
+    await controller.getAllProperties(request, response);
 
     expect(PropertyModel.find).toHaveBeenCalled();
-    expect(res.status(200).json(testProperties)).toBe(testProperties);
+    expect(response.status).toHaveBeenCalledWith(200);
+    expect(response.status(200).json).toHaveBeenCalledWith(testProperties);
   });
-  test("it should return a property by id", async () => {
-    
+
+  test("should return a property by id", async () => {
+    request.params = { id: "1" };
+    await controller.getPropertyById(request, response);
+
+    expect(ObjectIdValidator.validate).toHaveBeenCalled();
+    expect(PropertyModel.findById).toHaveBeenCalled();
+    expect(response.status).toHaveBeenCalledWith(200);
+    expect(response.status(200).json).toHaveBeenCalledWith(testProperties[0]);
   });
 });
