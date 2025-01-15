@@ -25,7 +25,7 @@ describe("Property controller", () => {
         _id: "12345",
         role: "admin",
       },
-    } as Request;
+    } as unknown as Request;
 
     response = {
       status: jest.fn(() => response),
