@@ -4,11 +4,11 @@ import { UserModel } from "../models";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import config from "../config";
+import config from "../app-config";
 
 export const login = async (req: Request, res: Response) => {
   const { error } = authValidator.validate(req.body);
-
+  
   if (error) return res.status(400).json(error.message);
 
   try {
@@ -21,7 +21,7 @@ export const login = async (req: Request, res: Response) => {
       req.body.password,
       user.password
     );
-
+ 
     if (!isValidPassword)
       return res.status(400).json("This is not a valid email or password");
 
@@ -35,7 +35,9 @@ export const login = async (req: Request, res: Response) => {
     const token = jwt.sign(payload, config.jwtSecretKey);
     res.status(200).json({ token });
   } catch (error: any) {
-    return res.status(500).json("There is an error login a user, please try again later.");
+    return res
+      .status(500)
+      .json("There is an error login a user, please try again later.");
   }
 };
 

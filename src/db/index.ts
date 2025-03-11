@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import debug from "debug";
-import config from "../config";
+import config from "../app-config";
 
 const debugServer = debug("server:db");
 

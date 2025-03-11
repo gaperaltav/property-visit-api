@@ -1,11 +1,11 @@
 import express, { Express } from "express";
 import morgan from "morgan";
-import config from "./config";
+import appConfig from "./app-config";
 import debug from "debug";
 import { connectToDb } from "./db";
 import { loadingApiRoutes } from "./routes/index.js";
 
-const { env, port, jwtSecretKey } = config;
+const { env, port, jwtSecretKey } = appConfig;
 
 if (!jwtSecretKey) {
   console.error("FATAL ERROR: JWT_SECRET_KEY is not defined.");
