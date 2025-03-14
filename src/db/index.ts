@@ -1,17 +1,17 @@
-import mongoose from "mongoose";
-import debug from "debug";
-import config from "../app-config";
+import mongoose from 'mongoose'
+import debug from 'debug'
+import config from 'src/app-config'
 
-const debugServer = debug("server:db");
+const debugServer = debug('server:db')
 
-export function connectToDb() {
-  const { host } = config;
+export function connectToDB() {
+  const { host } = config
   return mongoose
     .connect(host)
     .then(() => {
-      debugServer("Connected to database");
+      debugServer(`Connected to ${host}`)
     })
     .catch((error) => {
-      debugServer("Failed to connect to database!", { message: error.message });
-    });
+      debugServer(`Failed to connect to ${host}`, { message: error.message })
+    })
 }

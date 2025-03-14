@@ -1,13 +1,13 @@
-import express from "express";
-import { authMiddleware as authorized } from "../middlewares/auth";
-import PropertyController from "../controllers/properties";
+import express from 'express'
+import { authMiddleware as authorized } from '../middlewares/auth'
+import PropertyController from '../controllers/properties'
 
-const router = express.Router();
+const router = express.Router()
 
-router.get("/", authorized, PropertyController.getAllProperties);
+router.get('/', authorized, PropertyController.getAllProperties)
 
-router.get("/:id", authorized, PropertyController.getPropertyById);
+router.get('/:id', authorized, PropertyController.getPropertyById)
 
-router.post("/", authorized, PropertyController.createProperty);
+router.post('/', authorized, PropertyController.createProperty)
 
-export default router;
+export default router

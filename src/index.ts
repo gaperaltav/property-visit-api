@@ -1,33 +1,33 @@
-import express, { Express } from "express";
-import morgan from "morgan";
-import appConfig from "./app-config";
-import debug from "debug";
-import { connectToDb } from "./db";
-import { loadingApiRoutes } from "./routes/index.js";
+import express, { Express } from 'express'
+import morgan from 'morgan'
+import appConfig from './app-config'
+import debug from 'debug'
+import { connectToDB } from './db'
+import { loadingApiRoutes } from './routes/index.js'
 
-const { env, port, jwtSecretKey } = appConfig;
+const { env, port, jwtSecretKey } = appConfig
 
 if (!jwtSecretKey) {
-  console.error("FATAL ERROR: JWT_SECRET_KEY is not defined.");
-  process.exit(1);
+  console.error('FATAL ERROR: JWT_SECRET_KEY is not defined.')
+  process.exit(1)
 }
 
-const serverDebugger = debug("server:app");
-const app: Express = express();
+const serverDebugger = debug('server:app')
+const app: Express = express()
 
-if (env === "development") {
-  app.use(morgan("dev"));
+if (env === 'development') {
+  app.use(morgan('dev'))
 }
 
 // Connecting to MongoDB
-connectToDb();
+connectToDB()
 
 // Loading api routes
-loadingApiRoutes(app);
+loadingApiRoutes(app)
 
-app.get("/api", (req, res) => {
-  res.send("Welcome to properties API.");
-});
+app.get('/api', (req, res) => {
+  res.send('Welcome to properties API.')
+})
 
-app.listen(port);
-serverDebugger(`Running server on port ${port}`);
+app.listen(port)
+serverDebugger(`Running server on port ${port}`)

@@ -1,35 +1,35 @@
-import { NextFunction, Response, Request } from "express";
-import jwt from "jsonwebtoken";
-import config from "../app-config";
-import { Roles } from "../types";
+import { NextFunction, Response, Request } from 'express'
+import jwt from 'jsonwebtoken'
+import config from '../app-config'
+import { Roles } from '../types'
 
 export const authMiddleware = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
-  const token = req.header("Authorization");
+  const token = req.header('Authorization')
 
   if (!token) {
-    return res.status(401).json("Access denied. No token provided.");
+    return res.status(401).json('Access denied. No token provided.')
   }
 
   try {
-    const verifyUser = jwt.verify(token, config.jwtSecretKey);
-    req.user = verifyUser;
-    next();
+    const verifyUser = jwt.verify(token, config.jwtSecretKey)
+    req.user = verifyUser
+    next()
   } catch (error) {
-    return res.status(401).json("Invalid Token");
+    return res.status(401).json('Invalid Token')
   }
-};
+}
 
 export const adminMiddleware = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   if (req.user.role === Roles.Admin) {
-    return next();
+    return next()
   }
-  return res.status(403).json("Access denied for this operation.");
-};
+  return res.status(403).json('Access denied for this operation.')
+}

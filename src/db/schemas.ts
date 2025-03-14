@@ -1,5 +1,5 @@
-import { Schema } from "mongoose";
-import { Property, PropertyCategories, Roles, User } from "../types";
+import { Schema } from 'mongoose'
+import { Property, PropertyCategories, Roles, User } from '../types'
 
 export const userSchema = new Schema<User>({
   name: {
@@ -25,9 +25,9 @@ export const userSchema = new Schema<User>({
     required: true,
     validate: {
       validator: function (value) {
-        return value.includes("@");
+        return value.includes('@')
       },
-      message: "this is not a valid email",
+      message: 'this is not a valid email',
     },
     unique: true,
   },
@@ -35,12 +35,12 @@ export const userSchema = new Schema<User>({
     type: String,
     validate: {
       validator: function (value) {
-        return Object.values(Roles).includes(value);
+        return Object.values(Roles).includes(value)
       },
-      message: "This is not a valid Role",
+      message: 'This is not a valid Role',
     },
   },
-});
+})
 
 export const propertySchema = new Schema<Property>({
   title: {
@@ -64,12 +64,12 @@ export const propertySchema = new Schema<Property>({
     required: true,
     validate: {
       validator: function (value) {
-        return Object.values(PropertyCategories).includes(value);
+        return Object.values(PropertyCategories).includes(value)
       },
-      message: "This is not a valid Category",
+      message: 'This is not a valid Category',
     },
   },
   tags: [String],
-  user: { type: Schema.ObjectId, ref: "user" },
+  user: { type: Schema.ObjectId, ref: 'user' },
   created_date: { type: Date, default: Date.now() },
-});
+})
