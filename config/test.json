@@ -1,0 +1,9 @@
+{
+  "jwtSecret": "SecretKey",
+  "server": {
+    "port": 8500
+  },
+  "db": {
+    "host": "mongodb://localhost/property-visit-testing"
+  }
+}

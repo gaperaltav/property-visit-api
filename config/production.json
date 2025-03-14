@@ -1,0 +1,10 @@
+{
+    "jwtSecret": "ProductionSecretKey",
+    "server": {
+      "port": 5000
+    },
+    "db": {
+      "host": "mongodb://localhost/property-visit"
+    }
+  }
+  
