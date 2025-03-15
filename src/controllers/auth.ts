@@ -4,7 +4,7 @@ import { UserModel } from '../models'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
-import config from '../app-config'
+import config from '../config'
 
 export const login = async (req: Request, res: Response) => {
   const { error } = authValidator.validate(req.body)

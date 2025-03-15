@@ -1,6 +1,6 @@
 import express, { Express } from 'express'
 import morgan from 'morgan'
-import appConfig from './app-config'
+import appConfig from '@src/config'
 import debug from 'debug'
 import { connectToDB } from './db'
 import { loadingApiRoutes } from './routes/index.js'
