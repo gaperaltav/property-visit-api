@@ -4,7 +4,22 @@ import { UserModel } from '../models'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
+import { UserPayload } from '../types/user'
+
 import config from '../config'
+
+/**
+ * Utility function to generate JWT token for a user.
+ */
+function _generateUserToken(user: UserPayload): string {
+  const payload = {
+    _id: user.id,
+    name: user.name,
+    lastName: user.lastName,
+    role: user.role,
+  };
+  return jwt.sign(payload, config.jwtSecretKey);
+}
 
 export const login = async (req: Request, res: Response) => {
   const { error } = authValidator.validate(req.body)
@@ -25,15 +40,14 @@ export const login = async (req: Request, res: Response) => {
     if (!isValidPassword)
       return res.status(400).json('This is not a valid email or password')
 
-    const payload = {
-      _id: user.id,
+    const token = _generateUserToken({      
+      id: user.id,
       name: user.name,
       lastName: user.lastName,
-      role: user.role,
-    }
+      role: user.role
+    });
 
-    const token = jwt.sign(payload, config.jwtSecretKey)
-    res.status(200).json({ token })
+    res.status(200).json({ token });
   } catch (error: any) {
     return res
       .status(500)

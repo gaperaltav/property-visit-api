@@ -29,5 +29,7 @@ app.get('/api', (req, res) => {
   res.send('Welcome to properties API.')
 })
 
-app.listen(port)
+const server = app.listen(port)
 serverDebugger(`Running server on port ${port}`)
+
+export default server

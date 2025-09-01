@@ -34,5 +34,5 @@ export const ObjectIdValidator = Joi.object({
 
 export const authValidator = Joi.object({
   email: Joi.string().email().required(),
-  password: Joi.string(),
+  password: Joi.string().required(),
 })

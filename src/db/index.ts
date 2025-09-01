@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import debug from 'debug'
-import config from '@src/config'
+import config from '../config'
 
 const debugServer = debug('server:db')
 
