@@ -2,8 +2,8 @@ import express, { Express } from 'express'
 import morgan from 'morgan'
 import appConfig from '@src/config'
 import debug from 'debug'
-import { connectToDB } from './db'
-import { loadingApiRoutes } from './routes/index.js'
+import { connectToDB } from '@src/db'
+import { loadingApiRoutes } from '@src/routes/index.js'
 
 const { env, port, jwtSecretKey } = appConfig
 
