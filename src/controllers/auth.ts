@@ -17,8 +17,8 @@ function _generateUserToken(user: UserPayload): string {
     name: user.name,
     lastName: user.lastName,
     role: user.role,
-  };
-  return jwt.sign(payload, config.jwtSecretKey);
+  }
+  return jwt.sign(payload, config.jwtSecretKey)
 }
 
 export const login = async (req: Request, res: Response) => {
@@ -40,14 +40,14 @@ export const login = async (req: Request, res: Response) => {
     if (!isValidPassword)
       return res.status(400).json('This is not a valid email or password')
 
-    const token = _generateUserToken({      
+    const token = _generateUserToken({
       id: user.id,
       name: user.name,
       lastName: user.lastName,
-      role: user.role
-    });
+      role: user.role,
+    })
 
-    res.status(200).json({ token });
+    res.status(200).json({ token })
   } catch (error: any) {
     return res
       .status(500)

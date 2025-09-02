@@ -1,7 +1,7 @@
-import { describe, it } from 'node:test'
-import controller from '../../controllers/properties'
-import { ObjectIdValidator } from '../../controllers/validators'
-import { PropertyModel } from '../../models'
+import { describe } from 'node:test'
+import controller from '../../../controllers/properties'
+import { ObjectIdValidator } from '../../../controllers/validators'
+import { PropertyModel } from '../../../models'
 import { Request, Response } from 'express'
 
 let testProperties = [
