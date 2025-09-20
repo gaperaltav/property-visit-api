@@ -4,6 +4,7 @@ import appConfig from '@src/config'
 import debug from 'debug'
 import { connectToDB } from '@src/db'
 import { loadingApiRoutes } from '@src/routes/index.js'
+import { Server } from 'http'
 
 const { env, port, jwtSecretKey } = appConfig
 
@@ -29,7 +30,8 @@ app.get('/api', (req, res) => {
   res.send('Welcome to properties API.')
 })
 
-const server = app.listen(port)
+const server: Server = app.listen(port)
+
 serverDebugger(`Running server on port ${port}`)
 
 export default server

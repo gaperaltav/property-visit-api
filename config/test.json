@@ -4,6 +4,6 @@
     "port": 8500
   },
   "db": {
-    "host": "mongodb://localhost/property-visit-testing"
+    "host": "mongodb://localhost/property-visit_test"
   }
 }
