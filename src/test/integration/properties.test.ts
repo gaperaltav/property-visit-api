@@ -1,19 +1,18 @@
-import { Server } from "http";
 import { describe } from "node:test";
 import request from "supertest";
-
-let server: Server;
+import app from "../../index";
 
 describe("/api/properties", () => {
-    beforeEach(async () =>{
-        server = require('../../config');
+    beforeEach(async () => {
     })
-    afterEach(()=> {
-        if (server) {
-             server.close()
-        }
+    afterEach(() => {
+
     })
     describe("GET /", () => {
-        request(server).get('/api/properties');
+        it('It should return all properties', async () => {
+            request(app)
+                .get('/api/properties')
+            // .expect('Content-Type', /json/)
+        })
     })
 })

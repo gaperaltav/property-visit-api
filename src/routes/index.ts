@@ -1,9 +1,9 @@
 import express, { Express } from 'express'
 import helmet from 'helmet'
 
-import properties from './properties.js'
-import users from './users.js'
-import auth from './auth.js'
+import properties from './properties'
+import users from './users'
+import auth from './auth'
 
 export function loadingApiRoutes(app: Express) {
   app.use(express.json())

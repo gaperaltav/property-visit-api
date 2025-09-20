@@ -3,8 +3,7 @@ import morgan from 'morgan'
 import appConfig from '@src/config'
 import debug from 'debug'
 import { connectToDB } from '@src/db'
-import { loadingApiRoutes } from '@src/routes/index.js'
-import { Server } from 'http'
+import { loadingApiRoutes } from '@src/routes/index'
 
 const { env, port, jwtSecretKey } = appConfig
 
@@ -29,9 +28,8 @@ loadingApiRoutes(app)
 app.get('/api', (req, res) => {
   res.send('Welcome to properties API.')
 })
-
-const server: Server = app.listen(port)
-
+ 
+app.listen(port)
 serverDebugger(`Running server on port ${port}`)
 
-export default server
+export default app

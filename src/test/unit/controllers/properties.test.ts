@@ -18,7 +18,7 @@ let testProperties = [
 let request = {} as Request
 let response = {} as Response
 
-describe('Property controller', () => {
+describe('Unit Test: Property controller', () => {
   beforeEach(() => {
     request = {
       user: {
@@ -48,7 +48,7 @@ describe('Property controller', () => {
     jest.clearAllMocks()
   })
 
-  test('should return all properties', async () => {
+  test('should call find method', async () => {
     await controller.getAllProperties(request, response)
 
     expect(PropertyModel.find).toHaveBeenCalled()
@@ -56,7 +56,7 @@ describe('Property controller', () => {
     expect(response.status(200).json).toHaveBeenCalledWith(testProperties)
   })
 
-  test('should return a property by id', async () => {
+  test('should call FindById', async () => {
     request.params = { id: '1' }
     await controller.getPropertyById(request, response)
 
