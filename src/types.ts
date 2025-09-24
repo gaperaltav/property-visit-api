@@ -1,5 +1,5 @@
 import { Secret } from 'jsonwebtoken'
-import { Schema } from 'mongoose'
+import { Schema, Types } from 'mongoose'
 
 export enum Roles {
   Admin = 'admin',
@@ -22,12 +22,12 @@ export interface Property {
   category: PropertyCategories
   address: string
   created_date: Date
-  user: Schema.Types.ObjectId
+  user: Types.ObjectId
   visits?: Visit[]
 }
 export interface Visit {
   date: Date
-  userId?: Schema.Types.ObjectId
+  userId?: Types.ObjectId
 }
 export interface User {
   name: string
