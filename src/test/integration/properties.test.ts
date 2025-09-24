@@ -21,11 +21,13 @@ describe("Integration: /api/properties", () => {
 
     describe("GET /", () => {
         it('It should return all properties', async () => {
-            await request(app)
+           const response = await request(app)
                 .get('/api/properties')
                 .set('Authorization', token)
                 .expect('Content-Type', /json/)
                 .expect(200)
+
+            expect(response.body.length).toEqual(2);
         })
     })
 })
