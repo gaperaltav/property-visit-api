@@ -11,7 +11,7 @@ export const authMiddleware = (
   const token = req.header('Authorization')
 
   if (!token) {
-    return res.status(401).json('Access denied. No token provided.')
+    return res.status(400).json('Error: No token provided.')
   }
 
   try {
